@@ -1,6 +1,7 @@
 package com.example.EmployeePayrollApplication.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,6 +13,8 @@ import lombok.*;
 @Entity
 public class EmployeePayrollData {
     @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private long salary;
@@ -19,16 +22,21 @@ public class EmployeePayrollData {
     private String gender;
     private String notes;
     private LocalDate startDate;
+    @ElementCollection
+    @CollectionTable(name = "payroll_department", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "department")
+    private List<String> departments;
 
-    public EmployeePayrollData( String name, long salary, String profilePic, String gender, String notes,
-            LocalDate startDate) {
+    public EmployeePayrollData(String name, long salary, String profilePic, String gender,String notes,LocalDate startDate,List<String> departments) {
         this.name = name;
         this.salary = salary;
         this.profilePic = profilePic;
         this.gender = gender;
         this.notes = notes;
         this.startDate = startDate;
+        this.departments = departments;
     }
+
     
 }
 

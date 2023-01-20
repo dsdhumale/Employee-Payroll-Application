@@ -8,6 +8,8 @@ import com.example.EmployeePayrollApplication.dto.EmployeePayrollDto;
 import com.example.EmployeePayrollApplication.dto.ResponseDto;
 import com.example.EmployeePayrollApplication.service.IEmployeePayrollService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
@@ -18,7 +20,7 @@ public class EmployeePayrollController {
 
     // API for creating employee payroll data
     @PostMapping("/add")
-    public ResponseEntity<ResponseDto> create(@RequestBody EmployeePayrollDto employeePayrollDto) {
+    public ResponseEntity<ResponseDto> create(@Valid @RequestBody EmployeePayrollDto employeePayrollDto) {
         ResponseDto response = new ResponseDto("Employee Payroll Data Created Successfully",
                 employeePayrollService.createDetails(employeePayrollDto));
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -52,7 +54,7 @@ public class EmployeePayrollController {
     // API for Update particular employee payroll data by id
     @PutMapping("/update/{id}")
     public ResponseEntity<ResponseDto> create(@PathVariable int id,
-            @RequestBody EmployeePayrollDto employeePayrollDto) {
+            @Valid @RequestBody EmployeePayrollDto employeePayrollDto) {
         ResponseDto response = new ResponseDto("Employee Payroll Data Updated Successfully",
                 employeePayrollService.updateDetails(id, employeePayrollDto));
         return new ResponseEntity<>(response, HttpStatus.OK);
