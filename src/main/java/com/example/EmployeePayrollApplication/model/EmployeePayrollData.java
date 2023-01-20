@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Data
-@Table(name="employee_payroll_data")
+@Table(name = "employee_payroll_data")
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -15,7 +15,7 @@ public class EmployeePayrollData {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int employee_id;
     private String name;
     private long salary;
     private String profilePic;
@@ -27,7 +27,8 @@ public class EmployeePayrollData {
     @Column(name = "department")
     private List<String> departments;
 
-    public EmployeePayrollData(String name, long salary, String profilePic, String gender,String notes,LocalDate startDate,List<String> departments) {
+    public EmployeePayrollData(String name, long salary, String profilePic, String gender, String notes,
+            LocalDate startDate, List<String> departments) {
         this.name = name;
         this.salary = salary;
         this.profilePic = profilePic;
@@ -37,6 +38,4 @@ public class EmployeePayrollData {
         this.departments = departments;
     }
 
-    
 }
-

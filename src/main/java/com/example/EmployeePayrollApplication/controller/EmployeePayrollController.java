@@ -14,7 +14,6 @@ import jakarta.validation.Valid;
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
 
-
     @Autowired
     IEmployeePayrollService employeePayrollService;
 
@@ -57,6 +56,14 @@ public class EmployeePayrollController {
             @Valid @RequestBody EmployeePayrollDto employeePayrollDto) {
         ResponseDto response = new ResponseDto("Employee Payroll Data Updated Successfully",
                 employeePayrollService.updateDetails(id, employeePayrollDto));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // API for fetching employee payroll data by department
+    @GetMapping("department/{departments}")
+    public ResponseEntity<ResponseDto> getEmployeePayrollDataByDepartment(@PathVariable String departments) {
+        ResponseDto response = new ResponseDto("successfully fetched payroll data by department " + departments,
+                employeePayrollService.getEmployeePayrollByDepartment(departments));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
